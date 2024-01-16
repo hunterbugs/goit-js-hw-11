@@ -103,7 +103,7 @@ function onloadMore() {
 
       if (page > totalPages) {
         Notiflix.Notify.failure(
-          "We're sorry, but you've reached the end of search results."
+          "We are sorry, but you've reached the end of search results."
         );
       }
     })
