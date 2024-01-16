@@ -14,7 +14,6 @@ const perPage = 40;
 searchForm.addEventListener('submit', onSearchForm);
 
 function renderGallery(images) {
-  // Перевірка чи існує галерея перед вставкою даних
   if (!gallery) {
     return;
   }
@@ -49,7 +48,6 @@ function renderGallery(images) {
 
   gallery.insertAdjacentHTML('beforeend', markup);
 
-  // Цей код дозволяє автоматично прокручувати сторінку на висоту 2 карток галереї, коли вона завантажується
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
@@ -68,7 +66,7 @@ function onSearchForm(e) {
 
   if (query === '') {
     Notiflix.Notify.failure(
-      'The search string cannot be empty. Please specify your search query.',
+      'The search string cannot be empty. Please specify your search query.'
     );
     return;
   }
@@ -77,7 +75,7 @@ function onSearchForm(e) {
     .then(data => {
       if (data.totalHits === 0) {
         Notiflix.Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.',
+          'Sorry, there are no images matching your search query. Please try again.'
         );
       } else {
         renderGallery(data.hits);
@@ -105,7 +103,7 @@ function onloadMore() {
 
       if (page > totalPages) {
         Notiflix.Notify.failure(
-          "We're sorry, but you've reached the end of search results.",
+          "We're sorry, but you've reached the end of search results."
         );
       }
     })
@@ -119,20 +117,16 @@ function checkIfEndOfPage() {
   );
 }
 
-// Функція, яка виконуеться, якщо користувач дійшов до кінця сторінки
 function showLoadMorePage() {
   if (checkIfEndOfPage()) {
     onloadMore();
   }
 }
 
-// Додати подію на прокручування сторінки, яка викликає функцію showLoadMorePage
 window.addEventListener('scroll', showLoadMorePage);
 
-// кнопка “вгору”->
 arrowTop.onclick = function () {
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // після scrollTo відбудеться подія "scroll", тому стрілка автоматично сховається
 };
 
 window.addEventListener('scroll', function () {
